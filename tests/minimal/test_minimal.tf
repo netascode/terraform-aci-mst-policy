@@ -14,33 +14,35 @@ terraform {
 module "main" {
   source = "../.."
 
-  name = "ABC"
+  name     = "MST1"
+  region   = "REG1"
+  revision = 1
 }
 
-data "aci_rest" "fvTenant" {
-  dn = "uni/tn-ABC"
+data "aci_rest" "stpMstRegionPol" {
+  dn = "uni/infra/mstpInstPol-default/mstpRegionPol-${module.main.name}"
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "fvTenant" {
-  component = "fvTenant"
+resource "test_assertions" "stpMstRegionPol" {
+  component = "stpMstRegionPol"
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.fvTenant.content.name
-    want        = "ABC"
+    got         = data.aci_rest.stpMstRegionPol.content.name
+    want        = module.main.name
   }
 
-  equal "nameAlias" {
-    description = "nameAlias"
-    got         = data.aci_rest.fvTenant.content.nameAlias
-    want        = ""
+  equal "regName" {
+    description = "regName"
+    got         = data.aci_rest.stpMstRegionPol.content.regName
+    want        = "REG1"
   }
 
-  equal "descr" {
-    description = "descr"
-    got         = data.aci_rest.fvTenant.content.descr
-    want        = ""
+  equal "rev" {
+    description = "rev"
+    got         = data.aci_rest.stpMstRegionPol.content.rev
+    want        = "1"
   }
 }
