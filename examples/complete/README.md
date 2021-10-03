@@ -13,7 +13,8 @@ Note that this example will create resources. Resources can be destroyed with `t
 
 ```hcl
 module "aci_mst_policy" {
-  source = "netascode/mst-policy/aci"
+  source  = "netascode/mst-policy/aci"
+  version = ">= 0.0.1"
 
   name     = "MST1"
   region   = "REG1"
