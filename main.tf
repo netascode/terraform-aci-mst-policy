@@ -25,7 +25,7 @@ resource "aci_rest" "stpMstRegionPol" {
 
 resource "aci_rest" "stpMstDomPol" {
   for_each   = { for instance in var.instances : instance.name => instance }
-  dn         = "${aci_rest.stpMstRegionPol.id}/mstpDomPol-${each.value.name}"
+  dn         = "${aci_rest.stpMstRegionPol.dn}/mstpDomPol-${each.value.name}"
   class_name = "stpMstDomPol"
   content = {
     name = each.value.name
@@ -35,7 +35,7 @@ resource "aci_rest" "stpMstDomPol" {
 
 resource "aci_rest" "fvnsEncapBlk" {
   for_each   = { for range in local.ranges : range.key => range.value }
-  dn         = "${aci_rest.stpMstDomPol[each.value.instance_name].id}/from-[vlan-${each.value.from}]-to-[vlan-${each.value.to}]"
+  dn         = "${aci_rest.stpMstDomPol[each.value.instance_name].dn}/from-[vlan-${each.value.from}]-to-[vlan-${each.value.to}]"
   class_name = "fvnsEncapBlk"
   content = {
     from      = "vlan-${each.value.from}"
