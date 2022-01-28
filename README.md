@@ -13,7 +13,7 @@ Location in GUI:
 ```hcl
 module "aci_mst_policy" {
   source  = "netascode/mst-policy/aci"
-  version = ">= 0.0.1"
+  version = ">= 0.1.0"
 
   name     = "MST1"
   region   = "REG1"
@@ -27,7 +27,6 @@ module "aci_mst_policy" {
     }]
   }]
 }
-
 ```
 
 ## Requirements
@@ -35,13 +34,13 @@ module "aci_mst_policy" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_aci"></a> [aci](#requirement\_aci) | >= 0.2.0 |
+| <a name="requirement_aci"></a> [aci](#requirement\_aci) | >= 2.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aci"></a> [aci](#provider\_aci) | >= 0.2.0 |
+| <a name="provider_aci"></a> [aci](#provider\_aci) | >= 2.0.0 |
 
 ## Inputs
 
@@ -63,7 +62,7 @@ module "aci_mst_policy" {
 
 | Name | Type |
 |------|------|
-| [aci_rest.fvnsEncapBlk](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
-| [aci_rest.stpMstDomPol](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
-| [aci_rest.stpMstRegionPol](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
+| [aci_rest_managed.fvnsEncapBlk](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest_managed) | resource |
+| [aci_rest_managed.stpMstDomPol](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest_managed) | resource |
+| [aci_rest_managed.stpMstRegionPol](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest_managed) | resource |
 <!-- END_TF_DOCS -->

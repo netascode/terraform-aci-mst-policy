@@ -13,7 +13,7 @@ locals {
   ])
 }
 
-resource "aci_rest" "stpMstRegionPol" {
+resource "aci_rest_managed" "stpMstRegionPol" {
   dn         = "uni/infra/mstpInstPol-default/mstpRegionPol-${var.name}"
   class_name = "stpMstRegionPol"
   content = {
@@ -23,9 +23,9 @@ resource "aci_rest" "stpMstRegionPol" {
   }
 }
 
-resource "aci_rest" "stpMstDomPol" {
+resource "aci_rest_managed" "stpMstDomPol" {
   for_each   = { for instance in var.instances : instance.name => instance }
-  dn         = "${aci_rest.stpMstRegionPol.dn}/mstpDomPol-${each.value.name}"
+  dn         = "${aci_rest_managed.stpMstRegionPol.dn}/mstpDomPol-${each.value.name}"
   class_name = "stpMstDomPol"
   content = {
     name = each.value.name
@@ -33,9 +33,9 @@ resource "aci_rest" "stpMstDomPol" {
   }
 }
 
-resource "aci_rest" "fvnsEncapBlk" {
+resource "aci_rest_managed" "fvnsEncapBlk" {
   for_each   = { for range in local.ranges : range.key => range.value }
-  dn         = "${aci_rest.stpMstDomPol[each.value.instance_name].dn}/from-[vlan-${each.value.from}]-to-[vlan-${each.value.to}]"
+  dn         = "${aci_rest_managed.stpMstDomPol[each.value.instance_name].dn}/from-[vlan-${each.value.from}]-to-[vlan-${each.value.to}]"
   class_name = "fvnsEncapBlk"
   content = {
     from      = "vlan-${each.value.from}"
