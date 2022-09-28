@@ -13,7 +13,7 @@ Location in GUI:
 ```hcl
 module "aci_mst_policy" {
   source  = "netascode/mst-policy/aci"
-  version = ">= 0.1.0"
+  version = ">= 0.2.0"
 
   name     = "MST1"
   region   = "REG1"
@@ -33,7 +33,7 @@ module "aci_mst_policy" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aci"></a> [aci](#requirement\_aci) | >= 2.0.0 |
 
 ## Providers
@@ -49,7 +49,7 @@ module "aci_mst_policy" {
 | <a name="input_name"></a> [name](#input\_name) | MST policy name. | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | MST region. | `string` | n/a | yes |
 | <a name="input_revision"></a> [revision](#input\_revision) | MST revision. | `number` | n/a | yes |
-| <a name="input_instances"></a> [instances](#input\_instances) | List of instances. Allowed values `id`: 1-4096. Allowed values `from`: 1-4096. Allowed values `to`: 1-4096. Default value `to`: value of `from`. | <pre>list(object({<br>    name = string<br>    id   = number<br>    vlan_ranges = optional(list(object({<br>      from = number<br>      to   = optional(number)<br>    })))<br>  }))</pre> | `[]` | no |
+| <a name="input_instances"></a> [instances](#input\_instances) | List of instances. Allowed values `id`: 1-4096. Allowed values `from`: 1-4096. Allowed values `to`: 1-4096. Default value `to`: value of `from`. | <pre>list(object({<br>    name = string<br>    id   = number<br>    vlan_ranges = optional(list(object({<br>      from = number<br>      to   = optional(number)<br>    })), [])<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 

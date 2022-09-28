@@ -31,7 +31,7 @@ variable "instances" {
     vlan_ranges = optional(list(object({
       from = number
       to   = optional(number)
-    })))
+    })), [])
   }))
   default = []
 

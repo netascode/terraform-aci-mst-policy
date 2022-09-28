@@ -1,12 +1,12 @@
 locals {
   ranges = flatten([
     for instance in var.instances : [
-      for range in instance.vlan_ranges != null ? instance.vlan_ranges : [] : {
+      for range in instance.vlan_ranges : {
         key = "${instance.name}/${range.from}"
         value = {
           instance_name = instance.name
           from          = range.from
-          to            = lookup(range, "to", range.from)
+          to            = range.to != null ? range.to : range.from
         }
       }
     ]
